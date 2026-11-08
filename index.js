@@ -1,11 +1,32 @@
-const openBtn = document.getElementById('openBtn');
-const square = document.getElementById('square');
+const names = ["John", "Tom", "Tim", "Jack"];
+let name = "Bob";
 
-openBtn.addEventListener('click', () => {
-  square.classList.toggle('show');
-});
+const list = document.querySelector(".list");
+const btn = document.getElementById("add-btn");
 
-square.addEventListener('click', () => {
-  const hue = Math.floor(Math.random() * 360);
-  square.style.background = `hsl(${hue}, 70%, 55%)`;
-});
+function showName(name) {
+    const li = document.createElement("li");
+    li.textContent = name;
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "X";
+    delBtn.style.display = "none";
+    li.appendChild(delBtn);
+
+    li.onclick = () => {
+        delBtn.style.display = "inline";
+    };
+
+    delBtn.onclick = () => {
+        li.remove();
+    };
+
+    list.appendChild(li);
+}
+
+names.forEach((n) => showName(n));
+
+btn.onclick = () => {
+    names.push(name);
+    showName(name);
+};
